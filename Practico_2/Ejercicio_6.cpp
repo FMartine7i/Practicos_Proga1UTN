@@ -5,12 +5,8 @@ using namespace std;
 int main(){
     float nota1, nota2, nota3, total;
 
-    cout << "Ingresá la nota del primer parcial." << endl;
-    cin >> nota1;
-    cout << "Ahora ingresá la nota de la segunda nota." << endl;
-    cin >> nota2;
-    cout << "Por último ingresá la nota de la tercera nota." << endl;
-    cin >> nota3;
+    cout << "Ingresá las 3 notas de los parciales entre espacios: ";
+    cin >> nota1 >> nota2 >> nota3;
 
     total = nota1 + nota2 + nota3;
 
