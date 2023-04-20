@@ -3,12 +3,12 @@
 using namespace std;
 
 int main(){
-    float nota1, nota2, nota3, total;
+    int nota1, nota2, nota3;
 
     cout << "Ingresá las 3 notas de los parciales entre espacios: ";
     cin >> nota1 >> nota2 >> nota3;
 
-    total = nota1 + nota2 + nota3;
+    float total = (float)nota1 + nota2 + nota3;
 
     float promedio = total/3;
     cout << "El promedio es: " << promedio << endl;
