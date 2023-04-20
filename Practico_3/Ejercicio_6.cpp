@@ -19,7 +19,7 @@ int main(){
     
     else{
         cout << "Solo puede ingresar caracteres A, B o C.";
-        return 1;
+        return 1; // salir del programa con código de error
     }
 
     cout << "El precio final es: $" << precioFinal << endl;
