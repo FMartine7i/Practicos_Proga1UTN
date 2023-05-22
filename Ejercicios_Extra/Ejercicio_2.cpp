@@ -10,6 +10,8 @@ int main(){
 
     angEnRadianes = angulo * M_PI / 180;
 
+    cout << "Valor en radianes: " << angEnRadianes << endl;
+    
     if(angulo > 360){
         vueltas = (int)angulo / 360;
         cuadrante = (int)round(angulo / 90) % 4;
