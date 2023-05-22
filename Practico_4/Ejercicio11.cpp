@@ -4,7 +4,7 @@ using namespace std;
 int main(){
     int num; 
 
-    cout << "Ingresasr un número entero positivo: " << endl;
+    cout << "Ingresar un número entero positivo: " << endl;
     cin >> num;
     cout << endl;
 

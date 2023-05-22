@@ -17,7 +17,8 @@ int main(){
     while (i <= numeroAdivinar){
         cout << "Ingresar un número aleatorio: ";
         cin >> numeroIngresado;
+        intentos++;
         i++;
     }
-    cout << "Es el número " << numeroIngresado << endl;
+    cout << "Adivinaste el número " << numeroIngresado << " luego de " << intentos << " intentos" <<endl;
 }

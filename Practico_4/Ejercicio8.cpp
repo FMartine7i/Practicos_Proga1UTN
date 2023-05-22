@@ -2,24 +2,21 @@
 using namespace std;
 
 int main(){
-    int i = 2, num;
-    bool esPrimo = true;
+    int cantidad, i = 0, num;
+    float media, suma = 0;
 
-    cout << "ingresar un número: " << endl;
-    cin >> num;
+    cout << "ingresar cantidad de números a introducir: ";
+    cin >> cantidad;
 
-    while(i < num){
-        if ( num % i == 0 ){
-            esPrimo = false;
-        break;
-        }
-
+    do{
+        cout << "ingrese un número: ";
+        cin >> num;
+        suma += num;
         i++;
     }
-    if ( esPrimo ){
-        cout << num << " es primo." << endl;
-    }
-    else{
-        cout << num << " no es primo." << endl;
-    }
+    while (i < cantidad);
+    media = suma / cantidad;
+
+    cout << "La media de la cantidad de números ingresados es: " << media << endl;
+    return 0;
 }
