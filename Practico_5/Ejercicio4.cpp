@@ -17,13 +17,12 @@ int main(){
     }
     else{
         // Llenar el arreglo desde atrás hacia delante
-        for( int i = 9; i >= 0; i-- ){
-            if (longitud > 0) {
-                arreglo[i] = palabra[longitud - 1];
-                longitud--;
-            }
-            else{
+        for( int i = 0; i < 10; i++ ){
+           if (i < 10 - longitud) {
                 arreglo[i] = vacio;
+            } 
+        else {
+                arreglo[i] = palabra[longitud - i];
             }
         }
 

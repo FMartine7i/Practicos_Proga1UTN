@@ -6,7 +6,7 @@ int main(){
     int aux;
 
     for(int i = 0; i < 10; i++){
-        for( int j = 0; j < 9 - i; j++){
+        for( int j = 0; j < 10; j++){
             if (arreglo[j] < arreglo[j + 1]){   // si el anterior es menor al siguiente, cambian de lugar 
                aux = arreglo[j];
                arreglo[j] = arreglo[j + 1];
