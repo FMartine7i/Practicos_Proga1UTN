@@ -4,6 +4,7 @@
 using namespace std;
 
 const int n = 3;
+
 void cargarMatriz();
 void subMenu(int matriz[n][n]);
 void mostrarValores(int matriz[n][n]);
@@ -17,6 +18,7 @@ int main(){
     int opcion;
     bool salir = false;
 
+    // menu principal con un bucle do-while que se cierra cuando la variable booleana 'salir' = true;
     do{
         cout << "======= Menú Matriz =======" << endl;
         cout << " 1. Cargar matriz " << endl;
@@ -28,7 +30,7 @@ int main(){
 
         if (opcion == 1){
 
-               cargarMatriz(); 
+               cargarMatriz(); // llamo a la función cargarMatriz, la cual tiene un segundo menú que me permite elegir más opciones una vez tenga cargada la matriz
 
         }
         else if (opcion == 0){
@@ -41,14 +43,14 @@ int main(){
         }
     }
     while(salir == false);
-    return 0;
 }
 
-void cargarMatriz(){
+void cargarMatriz(){    // función cargarMatriz
     srand(time(0));
     int matriz[n][n];
     char nuevaOpcion;
 
+    // para el segundo menu creo otro bucle do-while que se detiene con la opción 'c', permitiendome volver al menú anterior
     do{
         cout << " ================= Menú Matriz ================= " << endl;
         cout << " a. Cargar con números aleatorios de 1 a 100 " << endl;
@@ -59,22 +61,22 @@ void cargarMatriz(){
         cin >> nuevaOpcion;
         cout << "\n";
 
-        if( nuevaOpcion == 'a'){
+        if( nuevaOpcion == 'a'){    // Si elijo 'a' la matriz se llena con números aleatorios del 1 al 100
             for (int i = 0; i < n; i++){
                 for (int j = 0; j < n; j++){
                     matriz[i][j] = rand() % 100 + 1;
                 }
             }
-            subMenu(matriz);
+            subMenu(matriz); // llamo a la funcion SubMenu() que me genera un último menú, una vez esté cargada la matriz
         }
-        else if (nuevaOpcion == 'b'){
+        else if (nuevaOpcion == 'b'){   // si el usuairo elije 'b' la matriz se llena con los números que este elija
             for ( int i = 0; i < n; i++){
                 for (int j = 0; j < n; j++){
                     cout << "Ingrese valor: ";
                     cin >> matriz[i][j];
                 }
             }
-            subMenu(matriz);
+            subMenu(matriz); // llamo a la funcion SubMenu() que me genera un último menú, una vez esté cargada la matriz
         }
         else if ( nuevaOpcion == 'c' ){
             break;
@@ -87,22 +89,24 @@ void cargarMatriz(){
 }
 
 void subMenu(int matriz[n][n]){
+    // esta función contiene otro bucle do-while que muestra otro menú interactivo; este menú da a a elegir las opciones de mostrar valores, encontrar un valor específico, etc;
     int opcion;
     bool volver = false;
     do{
-        cout << " ===================================================================== " << endl;
+        cout << " \n====================================================================== " << endl;
         cout << " 1. Mostrar valores de la matriz " << endl;
         cout << " 2. Buscar valor específico " << endl;
         cout << " 3. Devolver valor máximo o mínimo de la matriz " << endl;
         cout << " 4. Ordenar los valores de la matriz de forma ascendente o descendente " << endl;
         cout << " 5. Calcular determinante " << endl;
         cout << " 6. Volver " << endl;
-        cout << " =====================================================================\n " << endl;
+        cout << " ======================================================================\n " << endl;
 
         cin >> opcion;
         cout << "\n";
 
-        switch (opcion){
+        // Utilizo switch para ejecutar las funciones según la opción que elija
+        switch (opcion){ 
             case 1: 
                 mostrarValores(matriz);
                 break;
@@ -129,8 +133,9 @@ void subMenu(int matriz[n][n]){
     while(volver == false);
 }
 
-void mostrarValores(int matriz[n][n]){
+void mostrarValores(int matriz[n][n]){ 
 
+    // imprimir matriz
     for (int i = 0; i < n; i++){
         for (int j = 0; j < n; j++){
             cout << matriz[i][j] << " ";
@@ -141,115 +146,143 @@ void mostrarValores(int matriz[n][n]){
 }
 
 void buscarValor(int matriz[n][n]){
-    int num;
+    int num, i, j;
     bool encontrado = false;
 
     cout << "Ingresar número: ";
     cin >> num;
 
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-            if ( num == matriz[i][j]){
+    // Bucle para buscar el valor en la matriz
+    for (i = 0; i < n; i++){
+        for (j = 0; j < n; j++){
+            if ( num == matriz[i][j]){ 
                 encontrado = true;
-                cout << "El número " << num << " ha sido encontrado en la fila: " << i << ", columna: " << j << endl;
-                break;
+                break;  // Salir del bucle externo si se encuentra el número
             }
         }
-        if (encontrado){
-            break;
+        if (encontrado){  
+            break;  // Salir del bucle externo si se encuentra el número
         }
     }
 
-    if (!encontrado){
-        cout << "No se ha encontrado el número ingresado en la matriz." << endl;
+    if(encontrado){
+        cout << "El número " << num << " ha sido encontrado en la fila: " << i << ", columna: " << j << endl;
+    }
+    else{
+        cout << "El número " << num << " no ha sido encontrado." << endl;
     }
 }
 
 void devolver(int matriz[n][n]){
     char opcion;
 
-    cout << " Ingrese 'M' si desea obtener el valor máximo de la matriz o ingrese 'm' si desea obtener el valor máximo. " << endl;
-    cin >> opcion;
-    if ( opcion == 'M'){
-        int maximo = matriz[0][0]; // inicializo el valor máximo en 0 y luego comparo con los demás valores hasta llegar al más grande
+    // bucle do-while que se interrumpe cuando se elige la opción 'c'
+    do {
+        cout << " ========================================================== " << endl;
+        cout << " a. Devolver valor máximo de la matriz " << endl;
+        cout << " b. Devolver valor mínimo de la matriz " << endl;
+        cout << " c. Volver " << endl;
+        cout << " ==========================================================\n " << endl;
 
-        for (int i = 0; i < n; i++){
-            for (int j = 0; j < n; j++){
-                if (matriz[i][j] > maximo){
-                    maximo = matriz[i][j];
-                    cout << "El valor máximo de la matriz es: " << maximo << endl;
-                }
-            }
-        }
-    }
-    else if ( opcion == 'm'){
-        int minimo = matriz[0][0];
+        cin >> opcion;
+        cout << "\n";
 
-        for (int i = 0; i < n; i++){
-            for (int j = 0; j < n; j++){
-                if (matriz[i][j] <= minimo){
-                    minimo = matriz[i][j];
-                    cout << "El valor mínimo de la matriz es: " << minimo << endl;
+        int valor = matriz[0][0]; // inicializo el valor en 0 para luego comparar con los valores de la matriz y determinar el menor o mayor valor, según corresponda
+
+        switch (opcion) {
+            case 'a':
+                // inicio dos bucles for anidados para pasar por cada valor de la matriz y compararlos con la variable 'valor'
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        if (matriz[i][j] > valor) {
+                            valor = matriz[i][j];
+                        }
+                    }
                 }
-            }
+                cout << "El valor máximo de la matriz es: " << valor << endl;
+                break;
+            case 'b':
+                // inicio dos bucles for anidados para pasar por cada valor de la matriz y compararlos con la variable 'valor'
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        if (matriz[i][j] < valor) {
+                            valor = matriz[i][j];
+                        }
+                    }
+                }
+                cout << "El valor mínimo de la matriz es: " << valor << endl;
+                break;
+            case 'c':
+                break;
+            default:
+                cout << "Opción inválida..." << endl;
+                break;
         }
-    }
-    else {
-        cout << "Opcion inválida. Ingrese el caracter 'M' si desea obtener el valor máximo de la matriz o ingrese 'm' si desea obtener el valor máximo." << endl;
-    }
+
+        cout << endl;
+
+    } while (opcion != 'c');
 }
 
 void ordenar(int matriz[n][n]){
     char opcion;
 
-    cout << "Ingrese los caracteres 'A' o 'a', si desea ordenar la matriz de forma ascendente o ingrese los caracteres 'D' o 'd' si desea ordenar la matriz de forma descendente." << endl;
-    cin >> opcion;
+    //bucle do-while para generar otro menú que dé a elegir entre ordenar la matriz de forma ascendente o de forma descendente
+    do{
+        cout << " ========================================================== " << endl;
+        cout << " a. Ordenar la matriz de forma ascendente " << endl;
+        cout << " b. Ordenar la matriz de forma descedente " << endl;
+        cout << " c. Volver " << endl;
+        cout << " ==========================================================\n " << endl;
 
-    if (opcion == 'a' || opcion == 'A'){
-        for (int k = 0; k < n * n - 1; k++){
-            for (int i = 0; i < n; i++){
-                for (int j = 0; j < n - 1; j++){
-                    if (matriz[i][j] > matriz[i][j + 1]){
-                        int temp = matriz[i][j];
-                        matriz[i][j] = matriz[i][j + 1];
-                        matriz[i][j + 1] = temp;                       
+        cin >> opcion;
+        cout << "\n";
+
+        switch(opcion){
+        case 'a':   // case 'a': ordena la matriz de forma ascendente con el método de burbujeo
+            for (int k = 0; k < n * n - 1; k++){
+                for (int i = 0; i < n; i++){
+                    for (int j = 0; j < n; j++){
+                        if (matriz[i][j] > matriz[i][j + 1]){
+                            int temp = matriz[i][j];
+                            matriz[i][j] = matriz[i][j + 1];
+                            matriz[i][j + 1] = temp;                       
+                        }
+                    }
+                }
+            }        
+            // imprimir matriz
+            mostrarValores(matriz);     // llamo a la funcion mostrarValores() para imprimir la matriz
+            break;
+        // Si se elije 'd' o 'D' ordena la matriz de forma descendente con tres bucles for anidados usando el método de burbujeo para matriz
+        case 'b':
+            for (int k = 0; k < n * n - 1; k++) { // case 'b': ordena la matriz de forma descendente con el método de burbujeo
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n - 1; j++) {
+                        if (matriz[i][j] < matriz[i][j + 1]) {
+                            int temp = matriz[i][j];
+                            matriz[i][j] = matriz[i][j + 1];
+                            matriz[i][j + 1] = temp;
+                        }
                     }
                 }
             }
-        }
-
-        for (int i = 0; i < n; i++){
-            for (int j = 0; j < n; j++){
-                cout << matriz[i][j] << " ";
-            }
-            cout << endl;
+            // imprimir matriz
+            mostrarValores(matriz); 
+            break;
+        case 'c':
+            break;
+        default:
+            cout << "Opción inválida..." << endl;
+            break;
         }
     }
-    else if (opcion == 'd' || opcion == 'D'){
-        for (int k = 0; k < n * n - 1; k++){
-            for (int i = 0; i < n; i++){
-                for (int j = 0; j < n - 1; j++){
-                    if (matriz[i][j] < matriz[i][j + 1]){
-                        int temp = matriz[i][j];
-                        matriz[i][j] = matriz[i][j + 1];
-                        matriz[i][j + 1] = temp;                       
-                    }
-                }
-            }
-        }
-       for (int i = 0; i < n; i++){
-            for (int j = 0; j < n; j++){
-                cout << matriz[i][j] << " ";
-            }
-            cout << endl;
-        } 
-    }
-    else {
-        cout << "Opcion inválida. Ingrese los caracteres 'A' o 'a', si desea ordenar la matriz de forma ascendente o ingrese los caracteres 'D' o 'd' si desea ordenar la matriz de forma descendente." << endl;
-    }
+    while(opcion != 'c');
 }
 
 void determinante(int matriz[n][n]){
-    int det = matriz[0][0] * matriz[1][1] * matriz[2][2] + matriz[0][1] * matriz[1][2] * matriz[2][0] + matriz[0][2] * matriz[1][0]* matriz[2][1] - (matriz[0][2] * matriz[1][1] * matriz[2][0] + matriz[0][1] * matriz[1][0]* matriz[2][2] + matriz[0][0] * matriz[2][1] * matriz[1][2]);
+    // obtener determinante con la regla de Sarrus
+    int det = matriz[0][0] * matriz[1][1] * matriz[2][2] + matriz[0][1] * matriz[1][2] * matriz[2][0] + matriz[0][2] * matriz[1][0] * matriz[2][1]
+            - matriz[0][2] * matriz[1][1] * matriz[2][0] - matriz[0][1] * matriz[1][0] * matriz[2][2] - matriz[0][0] * matriz[2][1] * matriz[1][2];
     cout << "El determinante es: " << det << endl;
 }
