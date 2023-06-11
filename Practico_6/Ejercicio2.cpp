@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int sumaArreglo(int arreglo[], int size){
+int sumaArreglo(int arreglo[], int& size){
     int suma = 0;
     for (int i = 0; i < size; i++){
         suma += arreglo[i];

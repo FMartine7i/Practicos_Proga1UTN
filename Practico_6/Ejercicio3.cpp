@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int valorMaximo(int arreglo[], int size){
+int valorMaximo(int arreglo[], int& size){
 
     int max = 0;
 
